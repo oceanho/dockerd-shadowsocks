@@ -16,11 +16,12 @@ On server.
 #  port: 58388
 #  password: RjN4aCd
 #  method: rc4-md5
-docker run -d --name ss-server --network host \
+docker run -d --name ss-server --network host --restart always \
   tommylau/shadowsocks:latest -s 127.0.0.1 -p 58388 -k RjN4aCd -m rc4-md5
 
 #ss-local info(On server-side too.)
-docker run --name ss-local --network host --entrypoint /usr/local/bin/ss-local \
+docker run -d --name ss-local --network host  --restart always \
+  --entrypoint /usr/local/bin/ss-local \
   tommylau/shadowsocks:latest -s 127.0.0.1 -p 58388 -l 10800 -k RjN4aCd -m rc4-md5
   
 # client(Your PC)
